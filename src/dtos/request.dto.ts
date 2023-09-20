@@ -1,9 +1,13 @@
-export class RequestCreateDto {
+import { ChatData, EmailData, PushData, SmsData } from "./data.dto";
+import { EmailReceiver, SmsReceiver, PushReceiver, ChatReceiver } from "./receiver.dto";
+import { ChatSender, EmailSender, PushSender, SmsSender } from "./sender.dto";
 
-    senderUserData: any;
+export class RequestSendDto {
 
-    messageData: any;
+    sender: EmailSender | SmsSender | PushSender | ChatSender;
 
-    receiverUserData: any;
-    
+    data: EmailData | SmsData | PushData | ChatData;
+
+    receiver: EmailReceiver | SmsReceiver | PushReceiver | ChatReceiver;
+
 }

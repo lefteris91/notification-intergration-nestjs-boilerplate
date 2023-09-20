@@ -1,6 +1,6 @@
 import { MessageTypeEnum } from "../enums/message-type.enum";
 
-export class ProviderInfoDto {
+export class InfoResponseDto {
 
     name: string;
 
@@ -9,5 +9,5 @@ export class ProviderInfoDto {
     description?: string;
 
     type: MessageTypeEnum;
-    
+
 }

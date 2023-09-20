@@ -1,30 +1,39 @@
-import { Body, Controller, Get, HttpCode, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Param, Post, Provider } from '@nestjs/common';
 import { AppService } from './app.service';
-import { InfoResponseDto, MessageResponseDto } from './dtos/responses.dto';
+import { MessageResponseDto } from './dtos/responses.dto';
 import { MessageTypeEnum } from './enums/message-type.enum';
-import { RequestCreateDto } from './dtos/request.dto';
+import {  RequestSendDto } from './dtos/request.dto';
+import { InfoResponseDto } from './dtos/info-response.dto';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
+  /**
+   * @returns Promise<InfoResponseDto>
+   */
   @HttpCode(200)
   @Get("info")
   async info(): Promise<InfoResponseDto> {
     return {
-      info:{
+      
         name: "The name of the message provider",
         logo: "Logo of the provider",
         description: "A description of the provider",
         type: MessageTypeEnum.CHAT, // could be of type EMAIL, PUSH , SMS
-      }
+      
     }
   }
 
+  /**
+   *
+   * @param requestBody RequestCreateDto
+   * @returns Promise with MessageResponseDto
+   */
   @HttpCode(201)
-  @Post("create")
-  public async create(
-    @Body() requestBody: RequestCreateDto
+  @Post("send")
+  async send(
+    @Body() requestBody: RequestSendDto
   ): Promise<MessageResponseDto> {
     
     return {
@@ -35,5 +44,13 @@ export class AppController {
       }
     };
   }
+
+  @HttpCode(200)
+  @Delete(":id")
+  async delete(@Param("id") id: string): Promise<any> {
+    return null;
+  }
 }
+
+  
 
