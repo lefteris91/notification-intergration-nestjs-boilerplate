@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, HttpCode, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 import { InfoResponseDto } from './dtos/responses.dto';
 import { MessageTypeEnum } from './enums/message-type.enum';
@@ -7,6 +7,7 @@ import { MessageTypeEnum } from './enums/message-type.enum';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
+  @HttpCode(200)
   @Get("info")
   async info(): Promise<InfoResponseDto> {
     return {
@@ -18,4 +19,11 @@ export class AppController {
       }
     }
   }
+
+  @HttpCode(201)
+  @Post("create")
+  public async create(): Promise<any> {
+    
+  }
 }
+

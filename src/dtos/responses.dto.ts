@@ -1,6 +1,7 @@
-import { Provider } from "@nestjs/common";
-import { info } from "console";
+import { ProviderInfoDto } from "./provider-info.dto";
 
 export class InfoResponseDto {
-    info: ProviderInfoDto,
+
+    info: ProviderInfoDto
+    
 }
