@@ -1,5 +1,5 @@
 import { EmailConfig } from './config.dto';
-import { ChatData, EmailData, PushData, SmsData } from './data.dto';
+import { ChatData, SenderEmailDto, PushData, SmsData } from './sender.dto';
 import {
   EmailReceiver,
   SmsReceiver,
@@ -8,9 +8,7 @@ import {
 } from './receiver.dto';
 
 export class RequestSendDto {
-  data: EmailData | SmsData | PushData | ChatData;
+  sender: SenderEmailDto | SmsData | PushData | ChatData;
 
   receiver: EmailReceiver | SmsReceiver | PushReceiver | ChatReceiver;
-
-  config?: EmailConfig;
 }
