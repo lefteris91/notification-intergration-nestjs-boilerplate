@@ -44,7 +44,7 @@ export class InfoResponseDto {
   @ApiProperty({
     type: String,
     description: 'Name of the Integration',
-    example: 'Twilio',
+    example: 'Twilio SMS',
   })
   name: string;
 
@@ -82,7 +82,8 @@ export class InfoResponseDto {
   @ApiProperty({
     type: Object,
     required: false,
-    description: 'Settings for the Integration',
+    description:
+      'Settings for the Integration as required by the Service being Integrated. Key is the name of the setting and the value is a description of it and what it is used for.',
     example: { key1: 'value1', key2: 'value2' },
   })
   settings?: Record<string, any>;

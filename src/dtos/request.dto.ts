@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsObject } from 'class-validator';
+import { IsNotEmpty, IsObject, IsOptional } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { ChatReceiverDto } from './receivers/receiver-chat.dto';
 import { EmailReceiverDto } from './receivers/receiver-email.dto';
