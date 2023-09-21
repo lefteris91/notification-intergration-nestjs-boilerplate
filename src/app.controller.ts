@@ -1,9 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Body,
   Controller,
   Get,
   HttpCode,
-  Param,
   Post,
   Request,
   UseFilters,
@@ -11,15 +11,18 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { AppService } from './app.service';
-import { InfoResponseDto, MessageResponseDto } from './dtos/responses.dto';
+import {
+  ErrorResponseDto,
+  InfoResponseDto,
+  MessageResponseDto,
+  TaskResponseDto,
+} from './dtos/responses.dto';
 import { MessageTypeEnum } from './enums/message-type.enum';
 import { RequestSendDto } from './dtos/request.dto';
-import { NotificationStatusEnum } from './enums/notification-status.enum';
 import { ApiExceptionFilter } from './api.exception.filter';
 import { AuthGuard } from './auth/auth.guard';
 import { senderIsHoster } from './auth/auth.interceptors';
 import { JwtPayloadRequest } from './dtos/jwt-payload.request';
-import { RegisterDeviceForPush } from './dtos/config.dto';
 
 @Controller()
 @UseGuards(AuthGuard)
@@ -35,7 +38,7 @@ export class AppController {
   @Get('info')
   async info(
     @Request() request: Request & JwtPayloadRequest,
-  ): Promise<InfoResponseDto> {
+  ): Promise<InfoResponseDto | ErrorResponseDto> {
     return {
       name: 'The name of the message provider',
       logo: 'Logo of the provider',
@@ -54,10 +57,10 @@ export class AppController {
   async send(
     @Request() request: Request & JwtPayloadRequest,
     @Body() requestBody: RequestSendDto,
-  ): Promise<MessageResponseDto> {
+  ): Promise<MessageResponseDto | TaskResponseDto | ErrorResponseDto> {
     return {
       message_id: 'the id of the message',
-      status: NotificationStatusEnum.FAILED, // a boolean that indicates if the message was created successfully
+      success: false, // a boolean that indicates if the message was created successfully
     };
   }
 }

@@ -1,8 +1,7 @@
-import { Module } from "@nestjs/common";
-import { PassportModule } from "@nestjs/passport";
-
-import { BearerStrategy } from "./bearer.strategy";
-import { JwtModule, JwtService } from "@nestjs/jwt";
+import { Module } from '@nestjs/common';
+import { PassportModule } from '@nestjs/passport';
+import { BearerStrategy } from './bearer.strategy';
+import { JwtModule, JwtService } from '@nestjs/jwt';
 @Module({
   imports: [PassportModule, JwtModule],
   controllers: [],

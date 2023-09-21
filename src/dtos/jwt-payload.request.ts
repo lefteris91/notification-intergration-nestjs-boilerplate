@@ -1,6 +1,7 @@
-import { IsObject } from 'class-validator';
+import { IsNotEmpty, IsObject } from 'class-validator';
 
 export class JwtPayloadRequest {
+  @IsNotEmpty()
   @IsObject()
   user: {
     user_id: string;
