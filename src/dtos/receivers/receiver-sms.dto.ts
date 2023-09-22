@@ -9,5 +9,5 @@ export class SmsReceiverDto {
     description: 'An array of phone numbers for the receivers',
     example: ['+1234567890', '+9876543210'],
   })
-  receiver_phones: string[];
+  receiver_phone: string;
 }
