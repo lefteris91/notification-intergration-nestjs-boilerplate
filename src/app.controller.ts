@@ -25,6 +25,7 @@ import { senderIsHoster } from './auth/auth.interceptors';
 import { JwtPayloadRequest } from './dtos/jwt-payload.request';
 import {
   ApiCreatedResponse,
+  ApiNoContentResponse,
   ApiOkResponse,
   ApiOperation,
   ApiResponse,
@@ -94,5 +95,31 @@ export class AppController {
       message_id: 'the id of the message',
       success: false, // a boolean that indicates if the message was created successfully
     };
+  }
+
+  @HttpCode(200)
+  @ApiNoContentResponse({})
+  @ApiResponse({
+    type: ErrorResponseDto,
+    description: 'Error Response',
+  })
+  @Post('install')
+  async install(): Promise<null> {
+    //Perform all necessary actions here
+
+    return null;
+  }
+
+  @HttpCode(200)
+  @ApiNoContentResponse({})
+  @ApiResponse({
+    type: ErrorResponseDto,
+    description: 'Error Response',
+  })
+  @Post('uninstall')
+  async uninstall(): Promise<null> {
+    //Perform all necessary actions here
+
+    return null;
   }
 }
