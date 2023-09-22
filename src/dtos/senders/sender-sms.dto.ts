@@ -12,7 +12,7 @@ export class SmsSenderDto {
   message_id: string;
 
   @IsNotEmpty()
-  @Matches(/^\+\d{1,3}\.\d{9,11}$/)
+  @Matches(/^\+\d{1,3}\.\d{9,11}$/, { message: 'Invalid Phone Number' })
   @ApiProperty({
     type: String,
     description: `The sender phone number. It must match the following regex pattern:
