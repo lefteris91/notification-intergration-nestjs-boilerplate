@@ -53,7 +53,6 @@ async function bootstrap() {
     extraModels: [
       InfoResponseDto,
       ErrorResponseDto,
-      JwtPayloadRequest,
       RequestSendDto,
       MessageResponseDto,
       TaskResponseDto,
