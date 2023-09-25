@@ -21,7 +21,7 @@ import { MessageTypeEnum } from './enums/message-type.enum';
 import { RequestSendDto } from './dtos/request.dto';
 import { ApiExceptionFilter } from './api.exception.filter';
 import { AuthGuard } from './auth/auth.guard';
-import { senderIsHoster } from './auth/auth.interceptors';
+import { hasAdminRights, senderIsHoster } from './auth/auth.interceptors';
 import { JwtPayloadRequest } from './dtos/jwt-payload.request';
 import {
   ApiCreatedResponse,
@@ -36,6 +36,7 @@ import {
 @Controller()
 @UseGuards(AuthGuard)
 @UseInterceptors(senderIsHoster)
+@UseInterceptors(hasAdminRights)
 @UseFilters(new ApiExceptionFilter())
 export class AppController {
   constructor(private readonly appService: AppService) {}
@@ -94,6 +95,7 @@ export class AppController {
     return {
       message_id: 'the id of the message',
       success: false, // a boolean that indicates if the message was created successfully
+      timestamp: 'Date that message was sent'
     };
   }
 
@@ -104,10 +106,10 @@ export class AppController {
     description: 'Error Response',
   })
   @Post('install')
-  async install(): Promise<null> {
+  async install(): Promise<{ success: true }> {
     //Perform all necessary actions here
 
-    return null;
+    return { success: true };
   }
 
   @HttpCode(200)
@@ -117,9 +119,9 @@ export class AppController {
     description: 'Error Response',
   })
   @Post('uninstall')
-  async uninstall(): Promise<null> {
+  async uninstall(): Promise<{ success: true }> {
     //Perform all necessary actions here
 
-    return null;
+    return { success: true };
   }
 }
