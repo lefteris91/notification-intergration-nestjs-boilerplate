@@ -75,6 +75,7 @@ async function bootstrap() {
   app.useGlobalPipes(
     new ValidationPipe({
       disableErrorMessages: false,
+      forbidUnknownValues: true,
       exceptionFactory: (errors: ValidationError[]) => {
         console.log('ValidationPipe: ', errors);
         return new BadRequestException('Validation error');
