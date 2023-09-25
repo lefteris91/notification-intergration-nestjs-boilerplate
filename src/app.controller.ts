@@ -63,6 +63,9 @@ export class AppController {
       logo: 'Logo of the provider',
       description: 'A description of the provider',
       type: MessageTypeEnum.CHAT, // could be of type EMAIL, PUSH , SMS
+      settings: {
+        example: 'Settings for the Integration as required by the Service being Integrated.'
+      }
     };
   }
 
