@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsObject, IsOptional } from 'class-validator';
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, getSchemaPath } from '@nestjs/swagger';
 import { ChatReceiverDto } from './receivers/receiver-chat.dto';
 import { EmailReceiverDto } from './receivers/receiver-email.dto';
 import { PushReceiverDto } from './receivers/receiver-push.dto';
@@ -13,7 +13,12 @@ export class RequestSendDto {
   @IsNotEmpty()
   @IsObject()
   @ApiProperty({
-    type: [EmailSenderDto, SmsSenderDto, PushSenderDto, ChatSenderDto],
+    oneOf: [
+      { $ref: getSchemaPath(SmsSenderDto) },
+      { $ref: getSchemaPath(EmailSenderDto) },
+      { $ref: getSchemaPath(PushSenderDto) },
+      { $ref: getSchemaPath(ChatSenderDto) },
+    ],
     description: 'The sender information',
   })
   sender: EmailSenderDto | SmsSenderDto | PushSenderDto | ChatSenderDto;
@@ -21,7 +26,12 @@ export class RequestSendDto {
   @IsNotEmpty()
   @IsObject()
   @ApiProperty({
-    type: [EmailReceiverDto, SmsReceiverDto, PushReceiverDto, ChatReceiverDto],
+    oneOf: [
+      { $ref: getSchemaPath(SmsReceiverDto) },
+      { $ref: getSchemaPath(EmailReceiverDto) },
+      { $ref: getSchemaPath(PushReceiverDto) },
+      { $ref: getSchemaPath(ChatReceiverDto) },
+    ],
     description: 'The receiver information',
   })
   receiver:

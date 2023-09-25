@@ -35,7 +35,7 @@ export class EmailSenderDto {
     description: 'The email address of the sender',
     example: 'sender@example.com',
   })
-  from: string;
+  email: string;
 
   @IsNotEmpty()
   @IsString()
